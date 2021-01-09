@@ -5,63 +5,113 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#BFC0C0"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/button"
+    <EditText
+        android:id="@+id/phoneInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:text="Start"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="#3F51B5"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        android:autofillHints=""
+        android:ems="10"
+        android:fontFamily="@font/noto_sans_bold"
+        android:hint="@string/enter_number"
+        android:inputType="phone"
+        android:textColor="#EF8354"
+        android:textColorHighlight="#7C2D3142"
+        android:textColorHint="#7C2D3142"
+        android:textColorLink="#4F5D75"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="138dp"
+        android:layout_height="99dp"
+        android:fontFamily="@font/noto_sans_bold"
+        android:gravity="center"
+        android:text="@string/my_contacts"
+        android:textColor="#2D3142"
+        android:textColorHighlight="#3F51B5"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/nameInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.207" />
 
     <EditText
-        android:id="@+id/editTextPhone"
+        android:id="@+id/nameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="328dp"
+        android:autofillHints=""
         android:ems="10"
-        android:inputType="phone"
+        android:fontFamily="@font/noto_sans_bold"
+        android:hint="@string/enter_name"
+        android:inputType="textPersonName"
+        android:textColor="#EF8354"
+        android:textColorHighlight="#7C2D3142"
+        android:textColorHint="#7C2D3142"
+        android:textColorLink="#4F5D75"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/phoneInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.768" />
+
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/add_contact"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="12sp"
+        app:backgroundTint="#EF8354"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="114dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.26"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.844" />
 
-    <Switch
-        android:id="@+id/switch1"
+    <Button
+        android:id="@+id/buttonFind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:text="Switch"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPhone"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/find"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="12sp"
+        app:backgroundTint="#4F5D75"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.739"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.844" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="113dp"
-        android:layout_height="46dp"
-        android:fontFamily="casual"
-        android:paddingTop="10dp"
-        android:text="My first app"
-        android:textColor="#FFEB3B"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="65dp" />
-
-    <TextView
-        android:id="@+id/textView"
+        android:id="@+id/numberOfContacts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/switch1"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
+        android:fontFamily="@font/noto_sans_bold"
+        android:textColor="#2D3142"
+        android:textColorHint="#2D3142"
+        android:typeface="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneInput"
+        app:layout_constraintVertical_bias="0.172" />
 </androidx.constraintlayout.widget.ConstraintLayout>
