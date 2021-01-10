@@ -4,5 +4,5 @@
     <string name="find">Find</string>
     <string name="enter_name">Enter name</string>
     <string name="my_contacts">My Contacts</string>
-    <string name="enter_number">Enter number</string>
+    <string name="enter_number">Enter number (+380..)</string>
 </resources>

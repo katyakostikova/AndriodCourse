@@ -33,13 +33,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.errorName).setVisibility(View.INVISIBLE);
                 findViewById(R.id.errorNumber).setVisibility(View.INVISIBLE);
+                findViewById(R.id.nameAlreadyExists).setVisibility(View.INVISIBLE);
                 EditText nameInput = (EditText)findViewById(R.id.nameInput);
-                String name = nameInput.getText().toString();
+                String name = nameInput.getText().toString().trim();
                 if (name.isEmpty()) {
                     findViewById(R.id.errorName).setVisibility(View.VISIBLE);
                     return;
                 }
-
+                for (int i = 0; i < contacts.size(); i++) {
+                    if (contacts.get(i).contactName.equals(name)) {
+                        findViewById(R.id.nameAlreadyExists).setVisibility(View.VISIBLE);
+                        return;
+                    }
+                }
                 EditText numberInput = (EditText)findViewById(R.id.phoneInput);
                 String number = numberInput.getText().toString();
                 String regex = "(\\+\\d{12})";
@@ -51,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                contacts.add(new Contact(name.trim(), number.trim()));
+                contacts.add(new Contact(name, number.trim()));
                 numberOfContacts.setText("Number of contacts: " + contacts.size());
+                nameInput.setText("");
+                numberInput.setText("");
             }
         };
 
@@ -63,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.errorName).setVisibility(View.INVISIBLE);
                 findViewById(R.id.errorNumber).setVisibility(View.INVISIBLE);
+                findViewById(R.id.nameAlreadyExists).setVisibility(View.INVISIBLE);
                 EditText nameInput = (EditText)findViewById(R.id.nameInput);
                 String name = nameInput.getText().toString();
                 if (name.isEmpty()) {
