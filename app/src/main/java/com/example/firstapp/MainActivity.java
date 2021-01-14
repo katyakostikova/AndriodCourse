@@ -1,20 +1,22 @@
 package com.example.firstapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ArrayList<Contact> contacts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList<Contact> contacts = new ArrayList<>();
         TextView numberOfContacts = findViewById(R.id.numberOfContacts);
         numberOfContacts.setText("Number of contacts: " + contacts.size());
 
@@ -31,36 +32,10 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener onAddButtonClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findViewById(R.id.errorName).setVisibility(View.INVISIBLE);
-                findViewById(R.id.errorNumber).setVisibility(View.INVISIBLE);
-                findViewById(R.id.nameAlreadyExists).setVisibility(View.INVISIBLE);
-                EditText nameInput = (EditText)findViewById(R.id.nameInput);
-                String name = nameInput.getText().toString().trim();
-                if (name.isEmpty()) {
-                    findViewById(R.id.errorName).setVisibility(View.VISIBLE);
-                    return;
-                }
-                for (int i = 0; i < contacts.size(); i++) {
-                    if (contacts.get(i).contactName.equals(name)) {
-                        findViewById(R.id.nameAlreadyExists).setVisibility(View.VISIBLE);
-                        return;
-                    }
-                }
-                EditText numberInput = (EditText)findViewById(R.id.phoneInput);
-                String number = numberInput.getText().toString();
-                String regex = "(\\+\\d{12})";
-                Pattern numberCheck = Pattern.compile(regex);
-                Matcher numberRegexCheck = numberCheck.matcher(number.trim());
-                if (!numberRegexCheck.matches()) {
-                    Log.e("matcher", Boolean.toString(numberRegexCheck.matches()));
-                    findViewById(R.id.errorNumber).setVisibility(View.VISIBLE);
-                    return;
-                }
 
-                contacts.add(new Contact(name, number.trim()));
-                numberOfContacts.setText("Number of contacts: " + contacts.size());
-                nameInput.setText("");
-                numberInput.setText("");
+                Intent intent = new Intent(MainActivity.this, AddContactActivity.class);
+                intent.putExtra("contactsList", contacts);
+                MainActivity.this.startActivityForResult(intent, 1);
             }
         };
 
@@ -69,29 +44,44 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener onFindButtonClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findViewById(R.id.errorName).setVisibility(View.INVISIBLE);
-                findViewById(R.id.errorNumber).setVisibility(View.INVISIBLE);
-                findViewById(R.id.nameAlreadyExists).setVisibility(View.INVISIBLE);
-                EditText nameInput = (EditText)findViewById(R.id.nameInput);
+                EditText nameInput = findViewById(R.id.nameInput);
                 String name = nameInput.getText().toString();
                 if (name.isEmpty()) {
-                    findViewById(R.id.errorName).setVisibility(View.VISIBLE);
+                    Toast.makeText(MainActivity.this, "Wrong name", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                EditText numberInput = (EditText)findViewById(R.id.phoneInput);
+                Contact contact;
                 for (int i = 0; i < contacts.size(); i++) {
-                    if (contacts.get(i).contactName.equals(name)) {
-                        numberInput.setText(contacts.get(i).phoneNumber);
+                    if (contacts.get(i).contactName.equals(name.trim())) {
+                        contact = contacts.get(i);
+                        Intent intent = new Intent(MainActivity.this, FindContactActivity.class);
+                        intent.putExtra("contactName", contact.contactName);
+                        intent.putExtra("contactNumber", contact.phoneNumber);
+                        MainActivity.this.startActivity(intent);
+                        nameInput.setText("");
                         return;
                     }
                 }
-                nameInput.setText("Not found");
-                numberInput.setText("");
+                Toast.makeText(MainActivity.this, "You don't have such contact in your list", Toast.LENGTH_LONG).show();
             }
         };
 
         addButton.setOnClickListener(onAddButtonClickListener);
         findButton.setOnClickListener(onFindButtonClickListener);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                String name = data.getExtras().getString("contactName");
+                String number = data.getExtras().getString("phoneNumber");
+                contacts.add(new Contact(name, number.trim()));
+                TextView numberOfContacts = findViewById(R.id.numberOfContacts);
+                numberOfContacts.setText("Number of contacts: " + contacts.size());
+            }
+        }
     }
 }
