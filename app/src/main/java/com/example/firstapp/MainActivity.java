@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.firstapp.models.Contact;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,8 +69,20 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        Button viewAllContactsButton = findViewById(R.id.buttonViewAllContacts);
+
+        View.OnClickListener onViewAllContactsButtonClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ViewAllContactsActivity.class);
+                intent.putExtra("contactsList", contacts);
+                MainActivity.this.startActivity(intent);
+            }
+        };
+
         addButton.setOnClickListener(onAddButtonClickListener);
         findButton.setOnClickListener(onFindButtonClickListener);
+        viewAllContactsButton.setOnClickListener(onViewAllContactsButtonClickListener);
     }
 
     @Override

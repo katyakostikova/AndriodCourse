@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.firstapp.models.Contact;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,7 +62,7 @@ public class AddContactActivity extends AppCompatActivity {
             }
         };
 
-        Button backButton = findViewById(R.id.buttonBack);
+        Button backButton = findViewById(R.id.buttonBack3);
 
         View.OnClickListener onBackButtonClickListener = new View.OnClickListener() {
             @Override
