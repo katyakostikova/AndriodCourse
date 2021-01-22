@@ -9,13 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class FindContactActivity extends AppCompatActivity {
+public class InfoContactActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_find_contact);
+        setContentView(R.layout.activity_contact_info);
 
         Intent intent =  getIntent();
         TextView nameTextView = findViewById(R.id.nameFound);

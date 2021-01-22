@@ -18,8 +18,6 @@ import java.util.regex.Pattern;
 
 public class AddContactActivity extends AppCompatActivity {
 
-    private ArrayList<Contact> contacts;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -27,21 +25,20 @@ public class AddContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_contact);
 
         Button addButton = findViewById(R.id.buttonAdd2);
-        Intent intent = getIntent();
 
         View.OnClickListener onAddButtonClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddContactActivity.this.contacts =  new ArrayList<>(intent.getExtras().getParcelableArrayList("contactsList"));
+                ContactManager contactManager = ContactManager.getInstance();
 
-                EditText nameInput = (EditText) findViewById(R.id.nameInput2);
+                EditText nameInput = findViewById(R.id.nameInput2);
                 String name = nameInput.getText().toString();
                 if (name.isEmpty()) {
                     Toast.makeText(AddContactActivity.this, "Wrong name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                for (int i = 0; i < contacts.size(); i++) {
-                    if (contacts.get(i).contactName.equals(name)) {
+                for (int i = 0; i < contactManager.size(); i++) {
+                    if (contactManager.get(i).contactName.equals(name)) {
                         Toast.makeText(AddContactActivity.this, "Contact with such name already exists", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -55,9 +52,7 @@ public class AddContactActivity extends AppCompatActivity {
                     Toast.makeText(AddContactActivity.this, "Wrong number", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                intent.putExtra("contactName", name.trim());
-                intent.putExtra("phoneNumber", number);
-                AddContactActivity.this.setResult(RESULT_OK, intent);
+                contactManager.add(new Contact(name.trim(), number));
                 AddContactActivity.this.finish();
             }
         };
