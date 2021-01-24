@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BFC0C0"
+    android:visibility="visible"
+    tools:context=".MainActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAllContacts"
+        android:layout_width="400dp"
+        android:layout_height="0dp"
+        android:background="#BFC0C0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="138dp"
+        android:layout_height="99dp"
+        android:fontFamily="@font/noto_sans_bold"
+        android:gravity="center"
+        android:text="@string/my_contacts"
+        android:textColor="#2D3142"
+        android:textColorHighlight="#3F51B5"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toStartOf="@+id/allContactsInfoRoot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/allContactsInfoRoot"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#BFC0C0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/recyclerViewAllContacts"
+        tools:context=".InfoContactActivity"
+        tools:layout_editor_absoluteY="-28dp" >
+
+    </FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonAdd"
+        style="@style/MyFabStyle"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:clickable="true"
+        android:scaleType="matrix"
+        app:backgroundTint="#EF8354"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerViewAllContacts"
+        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.964"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:fabCustomSize="85dp"
+        app:maxImageSize="50dp"
+        app:useCompatPadding="false" />
+</androidx.constraintlayout.widget.ConstraintLayout>

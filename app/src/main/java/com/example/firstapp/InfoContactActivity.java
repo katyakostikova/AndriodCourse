@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 public class InfoContactActivity extends AppCompatActivity {
 
@@ -18,18 +15,13 @@ public class InfoContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact_info);
 
         Intent intent =  getIntent();
-        TextView nameTextView = findViewById(R.id.nameFound);
-        TextView numberTextView = findViewById(R.id.numberFound);
-        nameTextView.setText(intent.getExtras().getString("contactName"));
-        numberTextView.setText(intent.getExtras().getString("contactNumber"));
 
-        Button backButton = findViewById(R.id.buttonBack2);
-        View.OnClickListener onBackButtonClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        };
-        backButton.setOnClickListener(onBackButtonClickListener);
+        Bundle bundle = new Bundle();
+        bundle.putString("contactName", intent.getExtras().getString("contactName"));
+        bundle.putString("contactNumber", intent.getExtras().getString("contactNumber"));
+
+        AllContactsInfoFragment allContactsInfoFragment = new AllContactsInfoFragment();
+        allContactsInfoFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().add(R.id.allContactsInfoRoot, allContactsInfoFragment).commit();
     }
 }

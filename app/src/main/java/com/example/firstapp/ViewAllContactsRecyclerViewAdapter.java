@@ -1,5 +1,7 @@
 package com.example.firstapp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +17,13 @@ import com.example.firstapp.models.Contact;
 public class ViewAllContactsRecyclerViewAdapter extends RecyclerView.Adapter<ViewAllContactsRecyclerViewAdapter.ContactViewHolder> {
 
     private final ContactManager contacts;
+    private final AllContactsInfoFragmentHelper allContactsInfoFragmentHelper;
+    private final boolean openInNewActivity;
 
-    public ViewAllContactsRecyclerViewAdapter(ContactManager contacts) {
+    public ViewAllContactsRecyclerViewAdapter(ContactManager contacts, AllContactsInfoFragmentHelper allContactsInfoFragmentHelper, boolean openInNewActivity) {
         this.contacts = contacts;
+        this.allContactsInfoFragmentHelper = allContactsInfoFragmentHelper;
+        this.openInNewActivity =openInNewActivity;
     }
 
     @NonNull
@@ -52,11 +58,20 @@ public class ViewAllContactsRecyclerViewAdapter extends RecyclerView.Adapter<Vie
         public void bind(final Contact contact) {
             nameTextView.setText(contact.contactName);
             numberTextView.setText(contact.phoneNumber);
+
             itemView.setOnClickListener(v -> {
-                Intent intent = new Intent(nameTextView.getContext(), InfoContactActivity.class);
-                intent.putExtra("contactName", contact.contactName);
-                intent.putExtra("contactNumber", contact.phoneNumber);
-                nameTextView.getContext().startActivity(intent);
+
+                if(openInNewActivity) {
+
+                    Intent intent = new Intent(nameTextView.getContext(), InfoContactActivity.class);
+                    intent.putExtra("contactName", contact.contactName);
+                    intent.putExtra("contactNumber", contact.phoneNumber);
+                    nameTextView.getContext().startActivity(intent);
+
+                } else {
+                    allContactsInfoFragmentHelper.showContact(contact);
+                }
+
             });
         }
     }
