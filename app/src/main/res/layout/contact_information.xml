@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans_bold"
-                android:text="Name: "
+                android:text="@string/name"
                 android:textColor="@color/ebony_clay" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans_bold"
-                android:text="Number: "
+                android:text="@string/number"
                 android:textColor="@color/ebony_clay" />
 
             <TextView

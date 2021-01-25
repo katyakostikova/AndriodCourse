@@ -55,6 +55,7 @@
         android:layout_height="85dp"
         android:clickable="true"
         android:contentDescription="@string/add_contact"
+        android:focusable="true"
         android:scaleType="matrix"
         app:backgroundTint="@color/burnt_sienna"
         app:fabCustomSize="85dp"
