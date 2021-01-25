@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BFC0C0"
+    android:background="@color/silver_sand"
     android:visibility="visible"
     tools:context=".MainActivity">
 
@@ -13,7 +13,7 @@
         android:id="@+id/recyclerViewAllContacts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#BFC0C0"
+        android:background="@color/silver_sand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -28,8 +28,8 @@
         android:fontFamily="@font/noto_sans_bold"
         android:gravity="center"
         android:text="@string/my_contacts"
-        android:textColor="#2D3142"
-        android:textColorHighlight="#3F51B5"
+        android:textColor="@color/ebony_clay"
+        android:textColorHighlight="@color/ebony_clay"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -41,13 +41,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        app:backgroundTint="#EF8354"
+        android:contentDescription="@string/add_contact"
+        android:focusable="true"
+        app:backgroundTint="@color/burnt_sienna"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.919"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.96"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:maxImageSize="30dp"
+        app:tint="@color/ebony_clay"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

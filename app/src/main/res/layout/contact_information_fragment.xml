@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BFC0C0"
+    android:background="@color/silver_sand"
     tools:context=".InfoContactActivity">
 
     <TextView
@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
         android:text="Name: "
-        android:textColor="#2D3142"
-        android:textColorHint="#2D3142"
+        android:textColor="@color/ebony_clay"
+        android:textColorHint="@color/ebony_clay"
         android:textSize="18sp"
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,8 +30,8 @@
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/noto_sans_bold"
         android:text="Number:"
-        android:textColor="#2D3142"
-        android:textColorHint="#2D3142"
+        android:textColor="@color/ebony_clay"
+        android:textColorHint="@color/ebony_clay"
         android:textSize="18sp"
         android:typeface="normal"
         app:layout_constraintBottom_toTopOf="@+id/numberFound"
@@ -45,8 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
-        android:textColor="#EF8354"
-        android:textColorHint="#2D3142"
+        android:textColor="@color/burnt_sienna"
+        android:textColorHint="@color/ebony_clay"
         android:textSize="14sp"
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,8 +62,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="52dp"
         android:fontFamily="@font/noto_sans_bold"
-        android:textColor="#EF8354"
-        android:textColorHint="#2D3142"
+        android:textColor="@color/burnt_sienna"
+        android:textColorHint="@color/ebony_clay"
         android:textSize="14sp"
         android:typeface="normal"
         app:layout_constraintBottom_toTopOf="@+id/numberOfContacts7"
@@ -83,8 +83,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.125"
-        app:srcCompat="@android:drawable/sym_def_app_icon"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.128"
+        app:srcCompat="@drawable/_68px_circle_icons_profile_svg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
