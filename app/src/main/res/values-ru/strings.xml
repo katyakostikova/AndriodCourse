@@ -14,4 +14,7 @@
     <string name="name_detail">"Имя: "</string>
     <string name="number_detail">Номер:</string>
     <string name="favourite">Избранный</string>
+    <string name="all_contacts">Все контакты</string>
+    <string name="favourites">Избранные</string>
+    <string name="recent">Последние</string>
 </resources>

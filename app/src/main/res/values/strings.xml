@@ -14,4 +14,7 @@
     <string name="name_detail">"Name: "</string>
     <string name="number_detail">"Number: "</string>
     <string name="favourite">Favourite</string>
+    <string name="all_contacts">All Contacts</string>
+    <string name="favourites">Favourites</string>
+    <string name="recent">Recent</string>
 </resources>

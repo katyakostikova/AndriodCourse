@@ -14,4 +14,7 @@
     <string name="name_detail">Ім\'я: </string>
     <string name="number_detail">Номер: </string>
     <string name="favourite">Улюблений</string>
+    <string name="all_contacts">Всі контакти</string>
+    <string name="favourites">Улюблені</string>
+    <string name="recent">Останні</string>
 </resources>
