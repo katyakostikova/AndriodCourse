@@ -1,10 +1,12 @@
 package com.example.firstapp;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +14,12 @@ import android.view.View;
 
 import com.example.firstapp.models.Contact;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 
-public class MainActivity extends AppCompatActivity implements AllContactsInfoFragmentHelper {
+public class MainActivity extends AppCompatActivity  {
 
-    private RecyclerView allContactsRecycler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +27,28 @@ public class MainActivity extends AppCompatActivity implements AllContactsInfoFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        boolean openInNewActivity = (findViewById(R.id.allContactsInfoRoot) == null);
+        ViewPager2 viewPager = findViewById(R.id.viewPager);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
 
-        allContactsRecycler = findViewById(R.id.recyclerViewAllContacts);
-        ViewAllContactsRecyclerViewAdapter viewAllContactsRecyclerViewAdapter = new ViewAllContactsRecyclerViewAdapter(ContactManager.getInstance(), this, openInNewActivity);
-        allContactsRecycler.setAdapter(viewAllContactsRecyclerViewAdapter);
-        allContactsRecycler.setLayoutManager(new LinearLayoutManager(this));
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                switch (position) {
+                    case 0:
+                        tab.setText("All contacts");
+                        break;
+                    case 1:
+                        tab.setText("Recent");
+                        break;
+                    case 2:
+                        tab.setText("Favourites");
+                        break;
+                }
+            }
+        });
+
+        viewPager.setAdapter( new ViewPagerfragmentAdapter(this));
+        tabLayoutMediator.attach();
 
         FloatingActionButton addButton = findViewById(R.id.floatingActionButtonAdd);
 
@@ -41,26 +60,5 @@ public class MainActivity extends AppCompatActivity implements AllContactsInfoFr
         addButton.setOnClickListener(onAddButtonClickListener);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        allContactsRecycler.getAdapter().notifyDataSetChanged();
-    }
-
-
-    @Override
-    public void showContact(Contact contact) {
-        Bundle bundle = new Bundle();
-        bundle.putString("contactName", contact.contactName);
-        bundle.putString("contactNumber", contact.phoneNumber);
-
-        AllContactsInfoFragment allContactsInfoFragment = new AllContactsInfoFragment();
-        allContactsInfoFragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.allContactsInfoRoot, allContactsInfoFragment).commit();
-    }
 }
 
-interface AllContactsInfoFragmentHelper {
-
-    void showContact(Contact contact);
-}

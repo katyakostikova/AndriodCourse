@@ -11,4 +11,7 @@
     <string name="back">Назад</string>
     <string name="number">Номер</string>
     <string name="user_logo">Фото контакта</string>
+    <string name="name_detail">"Имя: "</string>
+    <string name="number_detail">Номер:</string>
+    <string name="favourite">Избранный</string>
 </resources>

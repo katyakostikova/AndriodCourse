@@ -13,14 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstapp.models.Contact;
 
+import java.util.ArrayList;
+
 
 public class ViewAllContactsRecyclerViewAdapter extends RecyclerView.Adapter<ViewAllContactsRecyclerViewAdapter.ContactViewHolder> {
 
-    private final ContactManager contacts;
+    private final ArrayList<Contact> contacts;
     private final AllContactsInfoFragmentHelper allContactsInfoFragmentHelper;
     private final boolean openInNewActivity;
 
-    public ViewAllContactsRecyclerViewAdapter(ContactManager contacts, AllContactsInfoFragmentHelper allContactsInfoFragmentHelper, boolean openInNewActivity) {
+    public ViewAllContactsRecyclerViewAdapter(ArrayList contacts, AllContactsInfoFragmentHelper allContactsInfoFragmentHelper, boolean openInNewActivity) {
         this.contacts = contacts;
         this.allContactsInfoFragmentHelper = allContactsInfoFragmentHelper;
         this.openInNewActivity =openInNewActivity;
@@ -59,20 +61,7 @@ public class ViewAllContactsRecyclerViewAdapter extends RecyclerView.Adapter<Vie
             nameTextView.setText(contact.contactName);
             numberTextView.setText(contact.phoneNumber);
 
-            itemView.setOnClickListener(v -> {
-
-                if(openInNewActivity) {
-
-                    Intent intent = new Intent(nameTextView.getContext(), InfoContactActivity.class);
-                    intent.putExtra("contactName", contact.contactName);
-                    intent.putExtra("contactNumber", contact.phoneNumber);
-                    nameTextView.getContext().startActivity(intent);
-
-                } else {
-                    allContactsInfoFragmentHelper.showContact(contact);
-                }
-
-            });
+            itemView.setOnClickListener(v -> allContactsInfoFragmentHelper.showContact(contact));
         }
     }
 }

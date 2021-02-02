@@ -11,4 +11,7 @@
     <string name="back">Back</string>
     <string name="number">Number</string>
     <string name="user_logo">User logo</string>
+    <string name="name_detail">"Name: "</string>
+    <string name="number_detail">"Number: "</string>
+    <string name="favourite">Favourite</string>
 </resources>

@@ -17,9 +17,13 @@ public final class ContactManager implements IContactManager {
         if (instance == null) {
             instance = new ContactManager();
         }
-
         return instance;
     }
+
+    public ArrayList<Contact> getContact() {
+        return contacts;
+    }
+
 
     @Override
     public Contact get(int position) {
@@ -34,5 +38,15 @@ public final class ContactManager implements IContactManager {
     @Override
     public void add(Contact newContact) {
         contacts.add(newContact);
+    }
+
+    public ArrayList getContactFavourites() {
+        ArrayList<Contact> contactsFavourites = new ArrayList<>();
+        for (int i = 0; i < size(); i++) {
+            if(get(i).isFavourite) {
+                contactsFavourites.add(get(i));
+            }
+        }
+        return contactsFavourites;
     }
 }
