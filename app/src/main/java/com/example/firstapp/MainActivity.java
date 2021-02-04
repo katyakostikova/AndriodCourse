@@ -1,25 +1,19 @@
 package com.example.firstapp;
 
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.firstapp.models.Contact;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 
 public class MainActivity extends AppCompatActivity  {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,24 +24,21 @@ public class MainActivity extends AppCompatActivity  {
         ViewPager2 viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
 
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position) {
-                    case 0:
-                        tab.setText("All contacts");
-                        break;
-                    case 1:
-                        tab.setText("Recent");
-                        break;
-                    case 2:
-                        tab.setText("Favourites");
-                        break;
-                }
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+            switch (position) {
+                case 0:
+                    tab.setText("All contacts");
+                    break;
+                case 1:
+                    tab.setText("Recent");
+                    break;
+                case 2:
+                    tab.setText("Favourites");
+                    break;
             }
         });
 
-        viewPager.setAdapter( new ViewPagerfragmentAdapter(this));
+        viewPager.setAdapter( new ViewPagerFragmentAdapter(this));
         tabLayoutMediator.attach();
 
         FloatingActionButton addButton = findViewById(R.id.floatingActionButtonAdd);

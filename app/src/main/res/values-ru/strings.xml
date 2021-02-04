@@ -17,4 +17,5 @@
     <string name="all_contacts">Все контакты</string>
     <string name="favourites">Избранные</string>
     <string name="recent">Последние</string>
+    <string name="edit">Изменить</string>
 </resources>

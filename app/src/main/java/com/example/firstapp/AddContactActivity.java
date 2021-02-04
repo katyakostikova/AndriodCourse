@@ -27,50 +27,42 @@ public class AddContactActivity extends AppCompatActivity {
 
         Button addButton = findViewById(R.id.buttonAdd2);
 
-        View.OnClickListener onAddButtonClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ContactManager contactManager = ContactManager.getInstance();
+        View.OnClickListener onAddButtonClickListener = v -> {
+            ContactManager contactManager = ContactManager.getInstance();
 
-                EditText nameInput = findViewById(R.id.nameInput2);
-                String name = nameInput.getText().toString();
-                if (name.isEmpty()) {
-                    Toast.makeText(AddContactActivity.this, "Wrong name", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                for (int i = 0; i < contactManager.size(); i++) {
-                    if (contactManager.get(i).contactName.equals(name)) {
-                        Toast.makeText(AddContactActivity.this, "Contact with such name already exists", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-
-                EditText numberInput = findViewById(R.id.phoneInput2);
-                String number = numberInput.getText().toString();
-                String regex = "(\\+\\d{12})";
-                Pattern numberCheck = Pattern.compile(regex);
-                Matcher numberRegexCheck = numberCheck.matcher(number.trim());
-                if (!numberRegexCheck.matches()) {
-                    Toast.makeText(AddContactActivity.this, "Wrong number", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                CheckBox checkBoxFavourite = findViewById(R.id.checkBoxFavourite);
-                boolean isFavourite = checkBoxFavourite.isChecked();
-
-                contactManager.add(new Contact(name.trim(), number, isFavourite));
-                AddContactActivity.this.finish();
+            EditText nameInput = findViewById(R.id.nameInput2);
+            String name = nameInput.getText().toString();
+            if (name.isEmpty()) {
+                Toast.makeText(AddContactActivity.this, "Wrong name", Toast.LENGTH_SHORT).show();
+                return;
             }
+            for (int i = 0; i < contactManager.size(); i++) {
+                if (contactManager.getById(i).getContactName().equals(name)) {
+                    Toast.makeText(AddContactActivity.this, "Contact with such name already exists", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            EditText numberInput = findViewById(R.id.phoneInput2);
+            String number = numberInput.getText().toString();
+            String regex = "(\\+\\d{12})";
+            Pattern numberCheck = Pattern.compile(regex);
+            Matcher numberRegexCheck = numberCheck.matcher(number.trim());
+            if (!numberRegexCheck.matches()) {
+                Toast.makeText(AddContactActivity.this, "Wrong number", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            CheckBox checkBoxFavourite = findViewById(R.id.checkBoxFavourite);
+            boolean isFavourite = checkBoxFavourite.isChecked();
+
+            contactManager.add(new Contact(name.trim(), number, isFavourite));
+            AddContactActivity.this.finish();
         };
 
         Button backButton = findViewById(R.id.buttonBack3);
 
-        View.OnClickListener onBackButtonClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        };
+        View.OnClickListener onBackButtonClickListener = v -> finish();
 
         addButton.setOnClickListener(onAddButtonClickListener);
         backButton.setOnClickListener(onBackButtonClickListener);

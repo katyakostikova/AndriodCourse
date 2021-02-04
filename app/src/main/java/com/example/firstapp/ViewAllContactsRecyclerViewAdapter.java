@@ -1,8 +1,5 @@
 package com.example.firstapp;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstapp.models.Contact;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class ViewAllContactsRecyclerViewAdapter extends RecyclerView.Adapter<ViewAllContactsRecyclerViewAdapter.ContactViewHolder> {
 
-    private final ArrayList<Contact> contacts;
+    private final List<Contact> contacts;
     private final AllContactsInfoFragmentHelper allContactsInfoFragmentHelper;
     private final boolean openInNewActivity;
 
-    public ViewAllContactsRecyclerViewAdapter(ArrayList contacts, AllContactsInfoFragmentHelper allContactsInfoFragmentHelper, boolean openInNewActivity) {
+    public ViewAllContactsRecyclerViewAdapter(List contacts, AllContactsInfoFragmentHelper allContactsInfoFragmentHelper, boolean openInNewActivity) {
         this.contacts = contacts;
         this.allContactsInfoFragmentHelper = allContactsInfoFragmentHelper;
         this.openInNewActivity =openInNewActivity;
@@ -38,7 +35,7 @@ public class ViewAllContactsRecyclerViewAdapter extends RecyclerView.Adapter<Vie
 
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
-        holder.bind(contacts.get(position));
+        holder.bind(position);
     }
 
     @Override
@@ -57,11 +54,12 @@ public class ViewAllContactsRecyclerViewAdapter extends RecyclerView.Adapter<Vie
             numberTextView = itemView.findViewById(R.id.numberContactInfo);
         }
 
-        public void bind(final Contact contact) {
-            nameTextView.setText(contact.contactName);
-            numberTextView.setText(contact.phoneNumber);
+        public void bind(final int position) {
+            Contact contact = ContactManager.getInstance().getById(position);
+            nameTextView.setText(contact.getContactName());
+            numberTextView.setText(contact.getPhoneNumber());
 
-            itemView.setOnClickListener(v -> allContactsInfoFragmentHelper.showContact(contact));
+            itemView.setOnClickListener(v -> allContactsInfoFragmentHelper.showContact(position));
         }
     }
 }

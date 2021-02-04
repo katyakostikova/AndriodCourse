@@ -87,4 +87,21 @@
         app:layout_constraintVertical_bias="0.128"
         app:srcCompat="@drawable/contact_logo" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="@string/edit"
+        android:focusable="true"
+        app:backgroundTint="@color/burnt_sienna"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.021"
+        app:maxImageSize="30dp"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

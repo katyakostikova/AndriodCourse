@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstapp.models.Contact;
 
-import java.util.ArrayList;
 
 public class AllContactsFragment extends Fragment implements AllContactsInfoFragmentHelper{
 
@@ -42,14 +41,14 @@ public class AllContactsFragment extends Fragment implements AllContactsInfoFrag
         boolean openInNewActivity = (view.findViewById(R.id.allContactsInfoRoot) == null);
 
         allContactsRecycler = view.findViewById(R.id.recyclerViewAllContacts);
-        ViewAllContactsRecyclerViewAdapter viewAllContactsRecyclerViewAdapter = new ViewAllContactsRecyclerViewAdapter(ContactManager.getInstance().getContact(), this, openInNewActivity);
+        ViewAllContactsRecyclerViewAdapter viewAllContactsRecyclerViewAdapter = new ViewAllContactsRecyclerViewAdapter(ContactManager.getInstance().getAll(), this, openInNewActivity);
         if (tabPosition == 1) {
             try {
-                int fromIndex = ContactManager.getInstance().getContact().size() - 3;
-                int toIndex = ContactManager.getInstance().getContact().size();
-                viewAllContactsRecyclerViewAdapter = new ViewAllContactsRecyclerViewAdapter((ArrayList) ContactManager.getInstance().getContact().subList(fromIndex, toIndex), this, openInNewActivity);
+                int fromIndex = ContactManager.getInstance().size() - 3;
+                int toIndex = ContactManager.getInstance().size();
+                viewAllContactsRecyclerViewAdapter = new ViewAllContactsRecyclerViewAdapter( ContactManager.getInstance().getAll().subList(fromIndex, toIndex), this, openInNewActivity);
             } catch (Exception err) {
-                viewAllContactsRecyclerViewAdapter = new ViewAllContactsRecyclerViewAdapter(ContactManager.getInstance().getContact(), this, openInNewActivity);
+                viewAllContactsRecyclerViewAdapter = new ViewAllContactsRecyclerViewAdapter(ContactManager.getInstance().getContactFavourites(), this, openInNewActivity);
             }
         } else if (tabPosition == 2) {
             viewAllContactsRecyclerViewAdapter = new ViewAllContactsRecyclerViewAdapter(ContactManager.getInstance().getContactFavourites(), this, openInNewActivity);
@@ -60,16 +59,17 @@ public class AllContactsFragment extends Fragment implements AllContactsInfoFrag
     }
 
     @Override
-    public void showContact(Contact contact) {
+    public void showContact(int position) {
+        Contact contact = ContactManager.getInstance().getById(position);
         if (getActivity().findViewById(R.id.allContactsInfoRoot) == null) {
             Intent intent = new Intent(getActivity(), InfoContactActivity.class);
-            intent.putExtra("contactName", contact.contactName);
-            intent.putExtra("contactNumber", contact.phoneNumber);
+            intent.putExtra("contactName", contact.getContactName());
+            intent.putExtra("contactNumber", contact.getPhoneNumber());
             startActivity(intent);
         } else {
             Bundle bundle = new Bundle();
-            bundle.putString("contactName", contact.contactName);
-            bundle.putString("contactNumber", contact.phoneNumber);
+            bundle.putString("contactName", contact.getContactName());
+            bundle.putString("contactNumber", contact.getPhoneNumber());
 
             AllContactsInfoFragment allContactsInfoFragment = new AllContactsInfoFragment();
             allContactsInfoFragment.setArguments(bundle);
@@ -87,5 +87,5 @@ public class AllContactsFragment extends Fragment implements AllContactsInfoFrag
 
 interface AllContactsInfoFragmentHelper {
 
-    void showContact(Contact contact);
+    void showContact(int position);
 }

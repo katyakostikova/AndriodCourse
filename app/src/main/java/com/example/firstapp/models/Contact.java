@@ -1,55 +1,55 @@
 package com.example.firstapp.models;
 
-import android.os.Build;
-import android.os.Parcel;
-import android.os.Parcelable;
 
-import androidx.annotation.RequiresApi;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class Contact implements Parcelable {
-    public String contactName;
-    public String phoneNumber;
-    public boolean isFavourite;
+@Entity
+public class Contact  {
+    private String contactName;
+    private String phoneNumber;
+    private boolean isFavourite;
 
-    public Contact(String name, String phoneNumber, boolean isFavourite) {
-        this.contactName = name;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    public Contact(String contactName, String phoneNumber, boolean isFavourite) {
+        this.contactName = contactName;
         this.phoneNumber= phoneNumber;
         this.isFavourite = isFavourite;
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.Q)
-    protected Contact(Parcel in) {
-        contactName = in.readString();
-        phoneNumber = in.readString();
-        isFavourite = in.readBoolean();
+    public String getContactName() {
+        return contactName;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(contactName);
-        dest.writeString(phoneNumber);
-        dest.writeBoolean(isFavourite);
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public boolean isFavourite() {
+        return isFavourite;
     }
 
-    public static final Creator<Contact> CREATOR = new Creator<Contact>() {
-        @RequiresApi(api = Build.VERSION_CODES.Q)
-        @Override
-        public Contact createFromParcel(Parcel in) {
-            return new Contact(in);
-        }
+    public int getId() {
+        return id;
+    }
 
-        @Override
-        public Contact[] newArray(int size) {
-            return new Contact[size];
-        }
-    };
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
 
 

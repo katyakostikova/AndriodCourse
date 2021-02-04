@@ -1,52 +1,61 @@
 package com.example.firstapp;
 
 import com.example.firstapp.models.Contact;
+import com.example.firstapp.room.ContactDao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public final class ContactManager implements IContactManager {
     
     private static ContactManager instance = null;
-    private ArrayList<Contact> contacts = new ArrayList<>();
+    private final ContactDao contactDao;
     
-    private ContactManager() {
-        
+    private ContactManager(ContactDao contactDao) {
+        this.contactDao = contactDao;
+    }
+
+    public static void init(ContactDao contactDao) {
+        if (instance == null) {
+            instance = new ContactManager(contactDao);
+        }
     }
     
     public static ContactManager getInstance() {
-        if (instance == null) {
-            instance = new ContactManager();
-        }
-        return instance;
+       return instance;
     }
-
-    public ArrayList<Contact> getContact() {
-        return contacts;
-    }
-
 
     @Override
-    public Contact get(int position) {
-        return contacts.get(position);
+    public List<Contact> getAll() {
+        return contactDao.getAll();
+    }
+
+    @Override
+    public Contact getById(int position) {
+        return contactDao.getById(position+1);
     }
 
     @Override
     public int size() {
-        return contacts.size();
+        return contactDao.getAll().size();
     }
 
     @Override
     public void add(Contact newContact) {
-        contacts.add(newContact);
+        contactDao.insert(newContact);
     }
 
-    public ArrayList getContactFavourites() {
-        ArrayList<Contact> contactsFavourites = new ArrayList<>();
-        for (int i = 0; i < size(); i++) {
-            if(get(i).isFavourite) {
-                contactsFavourites.add(get(i));
-            }
-        }
-        return contactsFavourites;
+    @Override
+    public List<Contact> getContactFavourites() {
+        return contactDao.getAllFavourite(true);
+    }
+
+    @Override
+    public void delete(Contact contact) {
+        contactDao.delete(contact);
+    }
+
+    @Override
+    public void update(Contact contact) {
+        contactDao.update(contact);
     }
 }
