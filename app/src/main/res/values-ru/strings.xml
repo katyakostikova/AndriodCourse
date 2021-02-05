@@ -18,4 +18,10 @@
     <string name="favourites">Избранные</string>
     <string name="recent">Последние</string>
     <string name="edit">Изменить</string>
+    <string name="wrong_name">Неправильное имя</string>
+    <string name="toast_same_name">Контакт с таким именем уже существует</string>
+    <string name="wrong_number">Неправильный номер</string>
+    <string name="contact_deleted">Контакт был успешно удален</string>
+    <string name="edit_contact_menu">Меню редактирования контакта</string>
+    <string name="contact_updated">Контакт был успешно изменен</string>
 </resources>

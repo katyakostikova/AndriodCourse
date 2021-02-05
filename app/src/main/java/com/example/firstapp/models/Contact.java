@@ -1,11 +1,19 @@
 package com.example.firstapp.models;
 
 
+import android.widget.Toast;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.firstapp.AddContactActivity;
+import com.example.firstapp.ContactManager;
+import com.example.firstapp.R;
+
+import java.util.List;
+
 @Entity
-public class Contact  {
+public class Contact {
     private String contactName;
     private String phoneNumber;
     private boolean isFavourite;
@@ -15,7 +23,7 @@ public class Contact  {
 
     public Contact(String contactName, String phoneNumber, boolean isFavourite) {
         this.contactName = contactName;
-        this.phoneNumber= phoneNumber;
+        this.phoneNumber = phoneNumber;
         this.isFavourite = isFavourite;
     }
 
@@ -50,6 +58,8 @@ public class Contact  {
     public void setId(int id) {
         this.id = id;
     }
+
+
 }
 
 

@@ -8,7 +8,7 @@
     tools:context=".AddContactActivity">
 
     <TextView
-        android:id="@+id/numberOfContacts4"
+        android:id="@+id/textViewNameEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -18,17 +18,16 @@
         android:textColorHint="@color/ebony_clay"
         android:textSize="14sp"
         android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/nameInput2"
+        app:layout_constraintBottom_toTopOf="@+id/nameInputEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phoneInput2"
+        app:layout_constraintTop_toBottomOf="@id/phoneInputEdit"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/nameInput2"
+        android:id="@+id/nameInputEdit"
         android:layout_width="219dp"
         android:layout_height="59dp"
-        android:layout_marginTop="212dp"
         android:autofillHints=""
         android:ems="10"
         android:fontFamily="@font/noto_sans_bold"
@@ -40,14 +39,15 @@
         android:textColorLink="@color/blue_bayoux"
         android:textCursorDrawable="@null"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/numberOfContacts5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.265" />
 
     <TextView
-        android:id="@+id/numberOfContacts5"
+        android:id="@+id/textViewNumberEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -57,12 +57,14 @@
         android:textColorHint="@color/ebony_clay"
         android:textSize="14sp"
         android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/phoneInput2"
+        app:layout_constraintBottom_toTopOf="@+id/phoneInputEdit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameInputEdit"
+        app:layout_constraintVertical_bias="0.951" />
 
     <EditText
-        android:id="@+id/phoneInput2"
+        android:id="@+id/phoneInputEdit"
         android:layout_width="219dp"
         android:layout_height="59dp"
         android:autofillHints=""
@@ -84,7 +86,7 @@
         app:layout_constraintVertical_bias="0.511" />
 
     <Button
-        android:id="@+id/buttonBack3"
+        android:id="@+id/buttonBackEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
@@ -101,7 +103,7 @@
         app:layout_constraintVertical_bias="0.963" />
 
     <Button
-        android:id="@+id/buttonAdd2"
+        android:id="@+id/buttonSaveEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
@@ -113,11 +115,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneInput2"
+        app:layout_constraintTop_toBottomOf="@+id/phoneInputEdit"
         app:layout_constraintVertical_bias="0.379" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewEditConatct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
@@ -132,17 +134,17 @@
         app:layout_constraintVertical_bias="0.057" />
 
     <CheckBox
-        android:id="@+id/checkBoxFavourite"
+        android:id="@+id/checkBoxFavouriteEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:button="@android:drawable/btn_star_big_off"
         android:fontFamily="@font/noto_sans_bold"
         android:text="@string/favourite"
         android:textColor="@color/ebony_clay"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAdd2"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSaveEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.291"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneInput2"
+        app:layout_constraintTop_toBottomOf="@+id/phoneInputEdit"
         app:layout_constraintVertical_bias="0.435" />
 </androidx.constraintlayout.widget.ConstraintLayout>

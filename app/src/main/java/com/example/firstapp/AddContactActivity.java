@@ -3,7 +3,6 @@ package com.example.firstapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.firstapp.models.Contact;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,42 +24,37 @@ public class AddContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
-        Button addButton = findViewById(R.id.buttonAdd2);
+        Button addButton = findViewById(R.id.buttonSaveEdit);
 
         View.OnClickListener onAddButtonClickListener = v -> {
-            ContactManager contactManager = ContactManager.getInstance();
 
-            EditText nameInput = findViewById(R.id.nameInput2);
+            EditText nameInput = findViewById(R.id.nameInputEdit);
             String name = nameInput.getText().toString();
-            if (name.isEmpty()) {
-                Toast.makeText(AddContactActivity.this, "Wrong name", Toast.LENGTH_SHORT).show();
+            if (!ContactManager.isNameInputCorrect(name)) {
+                Toast.makeText(AddContactActivity.this, R.string.wrong_name, Toast.LENGTH_SHORT).show();
                 return;
             }
-            for (int i = 0; i < contactManager.size(); i++) {
-                if (contactManager.getById(i).getContactName().equals(name)) {
-                    Toast.makeText(AddContactActivity.this, "Contact with such name already exists", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+            if (!ContactManager.isNameAlreadyExists(name)) {
+                Toast.makeText(AddContactActivity.this, R.string.toast_same_name, Toast.LENGTH_SHORT).show();
+                return;
             }
 
-            EditText numberInput = findViewById(R.id.phoneInput2);
+            EditText numberInput = findViewById(R.id.phoneInputEdit);
             String number = numberInput.getText().toString();
-            String regex = "(\\+\\d{12})";
-            Pattern numberCheck = Pattern.compile(regex);
-            Matcher numberRegexCheck = numberCheck.matcher(number.trim());
-            if (!numberRegexCheck.matches()) {
-                Toast.makeText(AddContactActivity.this, "Wrong number", Toast.LENGTH_SHORT).show();
+            if (!ContactManager.isNumberInputCorrect(number)) {
+                Toast.makeText(AddContactActivity.this, R.string.wrong_number, Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            CheckBox checkBoxFavourite = findViewById(R.id.checkBoxFavourite);
+            CheckBox checkBoxFavourite = findViewById(R.id.checkBoxFavouriteEdit);
             boolean isFavourite = checkBoxFavourite.isChecked();
 
-            contactManager.add(new Contact(name.trim(), number, isFavourite));
+            ContactManager.getInstance().add(new Contact(name.trim(), number, isFavourite));
             AddContactActivity.this.finish();
+            ContactManager.getInstance().notifyDataWasChanged();
         };
 
-        Button backButton = findViewById(R.id.buttonBack3);
+        Button backButton = findViewById(R.id.buttonBackEdit);
 
         View.OnClickListener onBackButtonClickListener = v -> finish();
 

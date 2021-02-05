@@ -3,7 +3,10 @@ package com.example.firstapp;
 import com.example.firstapp.models.Contact;
 import com.example.firstapp.room.ContactDao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class ContactManager implements IContactManager {
     
@@ -30,8 +33,8 @@ public final class ContactManager implements IContactManager {
     }
 
     @Override
-    public Contact getById(int position) {
-        return contactDao.getById(position+1);
+    public Contact getById(int contactId) {
+        return contactDao.getById(contactId);
     }
 
     @Override
@@ -46,7 +49,7 @@ public final class ContactManager implements IContactManager {
 
     @Override
     public List<Contact> getContactFavourites() {
-        return contactDao.getAllFavourite(true);
+        return contactDao.getAllFavourite();
     }
 
     @Override
@@ -57,5 +60,48 @@ public final class ContactManager implements IContactManager {
     @Override
     public void update(Contact contact) {
         contactDao.update(contact);
+    }
+
+    private List<OnContactsWasChanged> listeners = new ArrayList<>();
+
+    public void addOnContactsWasChangedListener(OnContactsWasChanged listener) {
+        listeners.add(listener);
+    }
+
+    public void notifyDataWasChanged() {
+        for(OnContactsWasChanged listener : listeners) {
+            listener.dataWasChanged();
+        }
+    }
+
+    interface OnContactsWasChanged {
+        void dataWasChanged();
+    }
+
+    public static boolean isNameInputCorrect(String name) {
+        if (name.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isNameAlreadyExists(String name) {
+        List<Contact> contacts = getInstance().getAll();
+        for (Contact c : contacts) {
+            if (c.getContactName().equals(name)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isNumberInputCorrect(String number) {
+        String regex = "(\\+\\d{12})";
+        Pattern numberCheck = Pattern.compile(regex);
+        Matcher numberRegexCheck = numberCheck.matcher(number.trim());
+        if (!numberRegexCheck.matches()) {
+            return false;
+        }
+        return true;
     }
 }

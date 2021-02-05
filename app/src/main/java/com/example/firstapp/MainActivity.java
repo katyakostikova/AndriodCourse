@@ -48,6 +48,15 @@ public class MainActivity extends AppCompatActivity  {
             MainActivity.this.startActivity(intent);
         };
 
+        ContactManager.getInstance().addOnContactsWasChangedListener(new ContactManager.OnContactsWasChanged() {
+            @Override
+            public void dataWasChanged() {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
+
         addButton.setOnClickListener(onAddButtonClickListener);
     }
 

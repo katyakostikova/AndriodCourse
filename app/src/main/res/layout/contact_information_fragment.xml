@@ -5,7 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/silver_sand"
-    tools:context=".InfoContactActivity">
+    tools:context=".ContactInfoActivity">
+
+    <Button
+        android:id="@+id/buttonBackToMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/back"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="12sp"
+        app:backgroundTint="@color/blue_bayoux"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.959" />
+
+    <CheckBox
+        android:id="@+id/checkBoxFavourite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@android:drawable/btn_star_big_off"
+        android:clickable="false"
+        android:fontFamily="@font/noto_sans_bold"
+        android:textColor="@color/ebony_clay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.834"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.312" />
 
     <TextView
         android:id="@+id/numberOfContacts6"
@@ -17,11 +49,12 @@
         android:textColorHint="@color/ebony_clay"
         android:textSize="18sp"
         android:typeface="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/nameFound"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.172" />
+        app:layout_constraintVertical_bias="0.821" />
 
     <TextView
         android:id="@+id/numberOfContacts7"
@@ -36,15 +69,18 @@
         android:typeface="normal"
         app:layout_constraintBottom_toTopOf="@+id/numberFound"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.993" />
+        app:layout_constraintVertical_bias="0.99" />
 
     <TextView
         android:id="@+id/numberFound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
+        android:foregroundGravity="top"
+        android:gravity="top"
         android:textColor="@color/burnt_sienna"
         android:textColorHint="@color/ebony_clay"
         android:textSize="14sp"
@@ -62,6 +98,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="52dp"
         android:fontFamily="@font/noto_sans_bold"
+        android:foregroundGravity="top"
+        android:gravity="top"
         android:textColor="@color/burnt_sienna"
         android:textColorHint="@color/ebony_clay"
         android:textSize="14sp"
@@ -69,8 +107,8 @@
         app:layout_constraintBottom_toTopOf="@+id/numberOfContacts7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberOfContacts6"
-        app:layout_constraintVertical_bias="0.736"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.942"
         tools:text="Name" />
 
     <ImageView
@@ -95,6 +133,7 @@
         android:contentDescription="@string/edit"
         android:focusable="true"
         app:backgroundTint="@color/burnt_sienna"
+        app:tint="@color/ebony_clay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.952"
@@ -103,5 +142,23 @@
         app:layout_constraintVertical_bias="0.021"
         app:maxImageSize="30dp"
         app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="@string/edit"
+        android:focusable="true"
+        app:backgroundTint="@color/burnt_sienna"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.021"
+        app:maxImageSize="30dp"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        app:tint="@color/ebony_clay" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

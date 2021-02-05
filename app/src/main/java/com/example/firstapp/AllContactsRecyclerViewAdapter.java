@@ -13,13 +13,14 @@ import com.example.firstapp.models.Contact;
 import java.util.List;
 
 
-public class ViewAllContactsRecyclerViewAdapter extends RecyclerView.Adapter<ViewAllContactsRecyclerViewAdapter.ContactViewHolder> {
+public class AllContactsRecyclerViewAdapter extends RecyclerView.Adapter<AllContactsRecyclerViewAdapter.ContactViewHolder> {
 
     private final List<Contact> contacts;
     private final AllContactsInfoFragmentHelper allContactsInfoFragmentHelper;
     private final boolean openInNewActivity;
 
-    public ViewAllContactsRecyclerViewAdapter(List contacts, AllContactsInfoFragmentHelper allContactsInfoFragmentHelper, boolean openInNewActivity) {
+    public AllContactsRecyclerViewAdapter(List contacts, AllContactsInfoFragmentHelper allContactsInfoFragmentHelper, boolean openInNewActivity) {
+        notifyDataSetChanged();
         this.contacts = contacts;
         this.allContactsInfoFragmentHelper = allContactsInfoFragmentHelper;
         this.openInNewActivity =openInNewActivity;
@@ -55,11 +56,11 @@ public class ViewAllContactsRecyclerViewAdapter extends RecyclerView.Adapter<Vie
         }
 
         public void bind(final int position) {
-            Contact contact = ContactManager.getInstance().getById(position);
+            Contact contact = ContactManager.getInstance().getById(contacts.get(position).getId());
             nameTextView.setText(contact.getContactName());
             numberTextView.setText(contact.getPhoneNumber());
 
-            itemView.setOnClickListener(v -> allContactsInfoFragmentHelper.showContact(position));
+            itemView.setOnClickListener(v -> allContactsInfoFragmentHelper.showContact(contacts.get(position).getId()));
         }
     }
 }

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class InfoContactActivity extends AppCompatActivity {
+public class ContactInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,11 +17,10 @@ public class InfoContactActivity extends AppCompatActivity {
         Intent intent =  getIntent();
 
         Bundle bundle = new Bundle();
-        bundle.putString("contactName", intent.getExtras().getString("contactName"));
-        bundle.putString("contactNumber", intent.getExtras().getString("contactNumber"));
+        bundle.putInt("contactId", intent.getExtras().getInt("contactId"));
 
-        AllContactsInfoFragment allContactsInfoFragment = new AllContactsInfoFragment();
-        allContactsInfoFragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().add(R.id.allContactsInfoRoot, allContactsInfoFragment).commit();
+        ContactInfoFragment contactInfoFragment = new ContactInfoFragment();
+        contactInfoFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().add(R.id.allContactsInfoRoot, contactInfoFragment).commit();
     }
 }

@@ -19,8 +19,8 @@ public interface ContactDao {
     @Query("SELECT * FROM Contact WHERE id IN (:id)")
     Contact getById(int id);
 
-    @Query("SELECT * FROM Contact WHERE isFavourite IN (:isFavourite) ORDER BY contactName")
-    List<Contact> getAllFavourite(boolean isFavourite);
+    @Query("SELECT * FROM Contact WHERE isFavourite = 1 ORDER BY contactName")
+    List<Contact> getAllFavourite();
 
     @Insert
     void insert(Contact... contacts);
