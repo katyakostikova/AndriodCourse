@@ -66,9 +66,12 @@ public class ContactInfoFragment extends Fragment {
             @Override
             public void dataWasChanged() {
                 Contact updatedContact = ContactManager.getInstance().getById(contactId);
-                contactNameTextView.setText(updatedContact.getContactName());
-                contactNumberTextView.setText(updatedContact.getPhoneNumber());
-                favouriteCheckBox.setChecked(updatedContact.isFavourite());
+                if(contact != null) {
+                    contactNameTextView.setText(updatedContact.getContactName());
+                    contactNumberTextView.setText(updatedContact.getPhoneNumber());
+                    favouriteCheckBox.setChecked(updatedContact.isFavourite());
+                }
+
             }
         });
 
