@@ -1,7 +1,9 @@
 package com.example.firstapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,8 +83,22 @@ public class ContactInfoFragment extends Fragment {
             getActivity().onBackPressed();
         };
 
-        backButton.setOnClickListener(onBackButtonClickListener);
+        Button callButton = view.findViewById(R.id.buttonCall);
 
+        View.OnClickListener onCallButtonClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + contact.getPhoneNumber()));
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        };
+
+
+        callButton.setOnClickListener(onCallButtonClickListener);
+        backButton.setOnClickListener(onBackButtonClickListener);
         editButton.setOnClickListener(onEditButtonClickListener);
         deleteButton.setOnClickListener(onDeleteButtonClickListener);
         return view;

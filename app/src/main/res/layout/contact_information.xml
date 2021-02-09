@@ -43,6 +43,7 @@
                 android:fontFamily="@font/noto_sans_bold"
                 android:textColor="@color/burnt_sienna"
                 tools:text="name" />
+
         </TableRow>
 
         <TableRow
@@ -73,4 +74,5 @@
         </TableRow>
 
     </TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
