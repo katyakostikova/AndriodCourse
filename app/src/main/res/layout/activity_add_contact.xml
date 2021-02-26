@@ -7,84 +7,6 @@
     android:background="@color/silver_sand"
     tools:context=".AddContactActivity">
 
-    <TextView
-        android:id="@+id/textViewNameEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/noto_sans_bold"
-        android:text="@string/name"
-        android:textColor="@color/ebony_clay"
-        android:textColorHint="@color/ebony_clay"
-        android:textSize="14sp"
-        android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/nameInputEdit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phoneInputEdit"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <EditText
-        android:id="@+id/nameInputEdit"
-        android:layout_width="219dp"
-        android:layout_height="59dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:fontFamily="@font/noto_sans_bold"
-        android:hint="@string/enter_name_hint"
-        android:inputType="textPersonName"
-        android:textColor="@color/burnt_sienna"
-        android:textColorHighlight="@color/ebony_clay_alfa"
-        android:textColorHint="@color/ebony_clay_alfa"
-        android:textColorLink="@color/blue_bayoux"
-        android:textCursorDrawable="@null"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.265" />
-
-    <TextView
-        android:id="@+id/textViewNumberEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/noto_sans_bold"
-        android:text="@string/number"
-        android:textColor="@color/ebony_clay"
-        android:textColorHint="@color/ebony_clay"
-        android:textSize="14sp"
-        android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/phoneInputEdit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameInputEdit"
-        app:layout_constraintVertical_bias="0.951" />
-
-    <EditText
-        android:id="@+id/phoneInputEdit"
-        android:layout_width="219dp"
-        android:layout_height="59dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:fontFamily="@font/noto_sans_bold"
-        android:hint="@string/enter_number_hint"
-        android:inputType="phone"
-        android:text="@string/start_number"
-        android:textColor="@color/burnt_sienna"
-        android:textColorHighlight="@color/ebony_clay_alfa"
-        android:textColorHint="@color/ebony_clay_alfa"
-        android:textColorLink="@color/blue_bayoux"
-        android:textCursorDrawable="@null"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.511" />
-
     <Button
         android:id="@+id/buttonBackEdit"
         android:layout_width="wrap_content"
@@ -102,22 +24,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.963" />
 
-    <Button
-        android:id="@+id/buttonSaveEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_bold"
-        android:text="@string/save"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="14sp"
-        app:backgroundTint="@color/burnt_sienna"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneInputEdit"
-        app:layout_constraintVertical_bias="0.379" />
-
     <TextView
         android:id="@+id/textViewEditConatct"
         android:layout_width="wrap_content"
@@ -133,18 +39,106 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.057" />
 
-    <CheckBox
-        android:id="@+id/checkBoxFavouriteEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@android:drawable/btn_star_big_off"
-        android:fontFamily="@font/noto_sans_bold"
-        android:text="@string/favourite"
-        android:textColor="@color/ebony_clay"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSaveEdit"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="481dp"
+        android:layout_marginTop="75dp"
+        android:orientation="vertical"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.291"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneInputEdit"
-        app:layout_constraintVertical_bias="0.435" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEditConatct">
+
+        <TextView
+            android:id="@+id/textViewNameEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginLeft="75dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/name"
+            android:textColor="@color/ebony_clay"
+            android:textColorHint="@color/ebony_clay"
+            android:textSize="14sp"
+            android:typeface="normal" />
+
+        <EditText
+            android:id="@+id/nameInputEdit"
+            android:layout_width="219dp"
+            android:layout_height="59dp"
+            android:layout_marginBottom="20dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:fontFamily="@font/noto_sans_bold"
+            android:hint="@string/enter_name_hint"
+            android:inputType="textPersonName"
+            android:textColor="@color/burnt_sienna"
+            android:textColorHighlight="@color/ebony_clay_alfa"
+            android:textColorHint="@color/ebony_clay_alfa"
+            android:textColorLink="@color/blue_bayoux"
+            android:textCursorDrawable="@null"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewNumberEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:layout_marginLeft="65dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/number"
+            android:textColor="@color/ebony_clay"
+            android:textColorHint="@color/ebony_clay"
+            android:textSize="14sp"
+            android:typeface="normal" />
+
+        <EditText
+            android:id="@+id/phoneInputEdit"
+            android:layout_width="219dp"
+            android:layout_height="59dp"
+            android:layout_marginBottom="20dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:fontFamily="@font/noto_sans_bold"
+            android:hint="@string/enter_number_hint"
+            android:inputType="phone"
+            android:text="@string/start_number"
+            android:textColor="@color/burnt_sienna"
+            android:textColorHighlight="@color/ebony_clay_alfa"
+            android:textColorHint="@color/ebony_clay_alfa"
+            android:textColorLink="@color/blue_bayoux"
+            android:textCursorDrawable="@null"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/checkBoxFavouriteEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@android:drawable/btn_star_big_off"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/favourite"
+            android:textColor="@color/ebony_clay" />
+
+        <Button
+            android:id="@+id/buttonSaveEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="14sp"
+            app:backgroundTint="@color/burnt_sienna" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

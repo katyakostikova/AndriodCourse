@@ -1,5 +1,7 @@
 package com.example.firstapp;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -14,7 +16,11 @@ public class ViewPagerFragmentAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return new AllContactsFragment(position);
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", position);
+        AllContactsFragment allContactsFragment = new AllContactsFragment();
+        allContactsFragment.setArguments(bundle);
+        return allContactsFragment;
     }
 
     @Override

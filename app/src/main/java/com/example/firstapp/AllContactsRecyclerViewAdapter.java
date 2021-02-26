@@ -12,12 +12,15 @@ import com.example.firstapp.models.Contact;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 public class AllContactsRecyclerViewAdapter extends RecyclerView.Adapter<AllContactsRecyclerViewAdapter.ContactViewHolder> {
 
     private final List<Contact> contacts;
     private final AllContactsInfoFragmentHelper allContactsInfoFragmentHelper;
     private final boolean openInNewActivity;
+
 
     public AllContactsRecyclerViewAdapter(List contacts, AllContactsInfoFragmentHelper allContactsInfoFragmentHelper, boolean openInNewActivity) {
         notifyDataSetChanged();
@@ -49,6 +52,9 @@ public class AllContactsRecyclerViewAdapter extends RecyclerView.Adapter<AllCont
         protected TextView nameTextView;
         protected TextView numberTextView;
 
+        @Inject
+        public ContactManager contactManager;
+
         public ContactViewHolder(@NonNull View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.nameContactInfo);
@@ -56,7 +62,8 @@ public class AllContactsRecyclerViewAdapter extends RecyclerView.Adapter<AllCont
         }
 
         public void bind(final int position) {
-            Contact contact = ContactManager.getInstance().getById(contacts.get(position).getId());
+            MyApp.getContactManagerComponent().inject(this);
+            Contact contact = contactManager.getById(contacts.get(position).getId());
             nameTextView.setText(contact.getContactName());
             numberTextView.setText(contact.getPhoneNumber());
 

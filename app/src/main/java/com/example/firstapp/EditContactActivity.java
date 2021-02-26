@@ -12,18 +12,25 @@ import android.widget.Toast;
 
 import com.example.firstapp.models.Contact;
 
+import javax.inject.Inject;
+
 public class EditContactActivity extends AppCompatActivity {
 
     private int contactId;
+
+    @Inject
+    ContactManager contactManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
+        MyApp.getContactManagerComponent().inject(this);
 
         Intent intent = getIntent();
         contactId = intent.getExtras().getInt("contactId");
 
-        Contact contact = ContactManager.getInstance().getById(contactId);
+        Contact contact = contactManager.getById(contactId);
 
         EditText nameEditText = findViewById(R.id.nameInputEdit);
         EditText numberEditText = findViewById(R.id.phoneInputEdit);
@@ -39,12 +46,13 @@ public class EditContactActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = nameEditText.getText().toString();
-                if (!ContactManager.isNameInputCorrect(name)) {
+                ContactChecker contactChecker = new ContactChecker();
+                if (!contactChecker.isNameInputCorrect(name)) {
                     Toast.makeText(EditContactActivity.this, R.string.wrong_name, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String number = numberEditText.getText().toString();
-                if (!ContactManager.isNumberInputCorrect(number)) {
+                if (!contactChecker.isNumberInputCorrect(number)) {
                     Toast.makeText(EditContactActivity.this, R.string.wrong_number, Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -54,9 +62,9 @@ public class EditContactActivity extends AppCompatActivity {
                 contact.setPhoneNumber(number);
                 contact.setFavourite(isFavourite);
 
-                ContactManager.getInstance().update(contact);
+                contactManager.update(contact);
                 finish();
-                ContactManager.getInstance().notifyDataWasChanged();
+                contactManager.notifyDataWasChanged();
                 Toast.makeText(EditContactActivity.this, R.string.contact_updated, Toast.LENGTH_LONG).show();
             }
         };

@@ -8,23 +8,15 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class ContactManager implements IContactManager {
-    
-    private static ContactManager instance = null;
-    private final ContactDao contactDao;
-    
-    private ContactManager(ContactDao contactDao) {
-        this.contactDao = contactDao;
-    }
+import javax.inject.Inject;
 
-    public static void init(ContactDao contactDao) {
-        if (instance == null) {
-            instance = new ContactManager(contactDao);
-        }
-    }
+public final class ContactManager implements IContactManager {
+
+    @Inject
+    public ContactDao contactDao;
     
-    public static ContactManager getInstance() {
-       return instance;
+    public ContactManager() {
+        MyApp.getContactManagerComponent().inject(this);
     }
 
     @Override
@@ -78,30 +70,4 @@ public final class ContactManager implements IContactManager {
         void dataWasChanged();
     }
 
-    public static boolean isNameInputCorrect(String name) {
-        if (name.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean isNameAlreadyExists(String name) {
-        List<Contact> contacts = getInstance().getAll();
-        for (Contact c : contacts) {
-            if (c.getContactName().equals(name)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static boolean isNumberInputCorrect(String number) {
-        String regex = "(\\+\\d{12})";
-        Pattern numberCheck = Pattern.compile(regex);
-        Matcher numberRegexCheck = numberCheck.matcher(number.trim());
-        if (!numberRegexCheck.matches()) {
-            return false;
-        }
-        return true;
-    }
 }

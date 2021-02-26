@@ -2,20 +2,24 @@ package com.example.firstapp;
 
 import android.app.Application;
 
-import androidx.room.Room;
+import com.example.firstapp.di.components.ContactManagerComponent;
 
-import com.example.firstapp.room.AppDatabase;
-import com.example.firstapp.room.ContactDao;
+import com.example.firstapp.di.components.DaggerContactManagerComponent;
+import com.example.firstapp.di.modules.ContactManagerModule;
 
 public class MyApp extends Application {
+
+    private static ContactManagerComponent contactManagerComponent;
     @Override
     public void onCreate() {
         super.onCreate();
-        AppDatabase appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
-                "contacts_app").allowMainThreadQueries().build();
-        ContactDao contactDao = appDatabase.contactDao();
 
-        ContactManager.init(contactDao);
+        contactManagerComponent = DaggerContactManagerComponent.builder()
+                .contactManagerModule(new ContactManagerModule(this)).build();
+    }
+
+    public static ContactManagerComponent getContactManagerComponent() {
+        return contactManagerComponent;
     }
 }
 

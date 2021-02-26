@@ -16,13 +16,19 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
+
 public class AddContactActivity extends AppCompatActivity {
+
+    @Inject
+    public ContactManager contactManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
+        MyApp.getContactManagerComponent().inject(this);
 
         Button addButton = findViewById(R.id.buttonSaveEdit);
 
@@ -30,18 +36,19 @@ public class AddContactActivity extends AppCompatActivity {
 
             EditText nameInput = findViewById(R.id.nameInputEdit);
             String name = nameInput.getText().toString();
-            if (!ContactManager.isNameInputCorrect(name)) {
+            ContactChecker contactChecker = new ContactChecker();
+            if (!contactChecker.isNameInputCorrect(name)) {
                 Toast.makeText(AddContactActivity.this, R.string.wrong_name, Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (!ContactManager.isNameAlreadyExists(name)) {
+            if (!contactChecker.isNameAlreadyExists(name)) {
                 Toast.makeText(AddContactActivity.this, R.string.toast_same_name, Toast.LENGTH_SHORT).show();
                 return;
             }
 
             EditText numberInput = findViewById(R.id.phoneInputEdit);
             String number = numberInput.getText().toString();
-            if (!ContactManager.isNumberInputCorrect(number)) {
+            if (!contactChecker.isNumberInputCorrect(number)) {
                 Toast.makeText(AddContactActivity.this, R.string.wrong_number, Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -49,9 +56,9 @@ public class AddContactActivity extends AppCompatActivity {
             CheckBox checkBoxFavourite = findViewById(R.id.checkBoxFavouriteEdit);
             boolean isFavourite = checkBoxFavourite.isChecked();
 
-            ContactManager.getInstance().add(new Contact(name.trim(), number, isFavourite));
+            contactManager.add(new Contact(name.trim(), number, isFavourite));
             AddContactActivity.this.finish();
-            ContactManager.getInstance().notifyDataWasChanged();
+            contactManager.notifyDataWasChanged();
         };
 
         Button backButton = findViewById(R.id.buttonBackEdit);

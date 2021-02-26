@@ -13,23 +13,27 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import javax.inject.Inject;
+
 public class AllContactsFragment extends Fragment implements AllContactsInfoFragmentHelper{
 
     private int tabPosition;
     private RecyclerView allContactsRecycler;
 
+    @Inject
+    public ContactManager contactManager;
+
     public AllContactsFragment() {
 
     }
 
-    public AllContactsFragment(int position) {
-        this.tabPosition = position;
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
+
+        tabPosition = getArguments().getInt("position");
 
     }
 
@@ -38,24 +42,25 @@ public class AllContactsFragment extends Fragment implements AllContactsInfoFrag
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.all_contacts_fragment, container, false);
         allContactsRecycler = view.findViewById(R.id.recyclerViewAllContacts);
+        MyApp.getContactManagerComponent().inject(this);
 
         boolean openInNewActivity = (view.findViewById(R.id.allContactsInfoRoot) == null);
         allContactsRecycler = view.findViewById(R.id.recyclerViewAllContacts);
-        AllContactsRecyclerViewAdapter allContactsRecyclerViewAdapter = new AllContactsRecyclerViewAdapter(ContactManager.getInstance().getAll(),
+        AllContactsRecyclerViewAdapter allContactsRecyclerViewAdapter = new AllContactsRecyclerViewAdapter(contactManager.getAll(),
                 this, openInNewActivity);
         if (tabPosition == 1) {
-            if (ContactManager.getInstance().size() > 3) {
-                int fromIndex = ContactManager.getInstance().size() - 3;
-                int toIndex = ContactManager.getInstance().size();
-                allContactsRecyclerViewAdapter = new AllContactsRecyclerViewAdapter( ContactManager.getInstance().getAll().subList(fromIndex, toIndex), this, openInNewActivity);
+            if (contactManager.size() > 3) {
+                int fromIndex = contactManager.size() - 3;
+                int toIndex = contactManager.size();
+                allContactsRecyclerViewAdapter = new AllContactsRecyclerViewAdapter( contactManager.getAll().subList(fromIndex, toIndex), this, openInNewActivity);
             }
         } else if (tabPosition == 2) {
-            allContactsRecyclerViewAdapter = new AllContactsRecyclerViewAdapter(ContactManager.getInstance().getContactFavourites(), this, openInNewActivity);
+            allContactsRecyclerViewAdapter = new AllContactsRecyclerViewAdapter(contactManager.getContactFavourites(), this, openInNewActivity);
         }
         allContactsRecycler.setAdapter(allContactsRecyclerViewAdapter);
         allContactsRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ContactManager.getInstance().addOnContactsWasChangedListener(new ContactManager.OnContactsWasChanged() {
+        contactManager.addOnContactsWasChangedListener(new ContactManager.OnContactsWasChanged() {
             @Override
             public void dataWasChanged() {
                 allContactsRecycler.getAdapter().notifyDataSetChanged();

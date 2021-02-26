@@ -3,7 +3,6 @@ package com.example.firstapp;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +19,13 @@ import androidx.fragment.app.Fragment;
 import com.example.firstapp.models.Contact;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import javax.inject.Inject;
+
 public class ContactInfoFragment extends Fragment {
     private int contactId;
+
+    @Inject
+    public ContactManager contactManager;
 
     public ContactInfoFragment() {
 
@@ -36,10 +40,11 @@ public class ContactInfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        MyApp.getContactManagerComponent().inject(this);
         View view = inflater.inflate(R.layout.contact_information_fragment, container, false);
         contactId = getArguments().getInt("contactId");
         TextView contactNameTextView =  view.findViewById(R.id.nameFound);
-        Contact contact = ContactManager.getInstance().getById(contactId);
+        Contact contact = contactManager.getById(contactId);
         contactNameTextView.setText(contact.getContactName());
         TextView contactNumberTextView =  view.findViewById(R.id.numberFound);
         contactNumberTextView.setText(contact.getPhoneNumber());
@@ -58,17 +63,17 @@ public class ContactInfoFragment extends Fragment {
         FloatingActionButton deleteButton = view.findViewById(R.id.floatingActionButtonDelete);
 
         View.OnClickListener onDeleteButtonClickListener = v -> {
-            ContactManager.getInstance().delete(ContactManager.getInstance().getById(contactId));
+            contactManager.delete(contactManager.getById(contactId));
             Toast.makeText(getContext(), R.string.contact_deleted, Toast.LENGTH_LONG).show();
             getActivity().onBackPressed();
-            ContactManager.getInstance().notifyDataWasChanged();
+            contactManager.notifyDataWasChanged();
         };
 
-        ContactManager.getInstance().addOnContactsWasChangedListener(new ContactManager.OnContactsWasChanged() {
+        contactManager.addOnContactsWasChangedListener(new ContactManager.OnContactsWasChanged() {
             @Override
             public void dataWasChanged() {
-                Contact updatedContact = ContactManager.getInstance().getById(contactId);
-                if(contact != null) {
+                Contact updatedContact = contactManager.getById(contactId);
+                if(updatedContact != null) {
                     contactNameTextView.setText(updatedContact.getContactName());
                     contactNumberTextView.setText(updatedContact.getPhoneNumber());
                     favouriteCheckBox.setChecked(updatedContact.isFavourite());

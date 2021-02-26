@@ -12,14 +12,20 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import javax.inject.Inject;
+
 
 public class MainActivity extends AppCompatActivity  {
+
+    @Inject
+    ContactManager contactManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MyApp.getContactManagerComponent().inject(this);
 
         ViewPager2 viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
@@ -48,7 +54,7 @@ public class MainActivity extends AppCompatActivity  {
             MainActivity.this.startActivity(intent);
         };
 
-        ContactManager.getInstance().addOnContactsWasChangedListener(new ContactManager.OnContactsWasChanged() {
+        contactManager.addOnContactsWasChangedListener(new ContactManager.OnContactsWasChanged() {
             @Override
             public void dataWasChanged() {
                 Intent intent = getIntent();
